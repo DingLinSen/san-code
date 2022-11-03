@@ -3,8 +3,7 @@
     "pages/shopping/shopping",
     "pages/optimal/optimal",
     "pages/personal/personal",
-    "components/i-swiper/i-swiper",
-    "components/i-code/i-code"
+    "pages/cart/cart"
   ],
   "window": {
     "backgroundTextStyle": "light",

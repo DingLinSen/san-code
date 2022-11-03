@@ -1,6 +1,6 @@
 // pages/shopping/shopping.js
+import ShoppingModel from '../../model/ShoppingModel'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -33,8 +33,43 @@ Page({
   },
 
   // 点击扫码按钮触发的方法
-  handleSanCode(){
-    console.log('123');
+  handleScanCode() {
+    // 只允许从相机扫码, 开启扫码
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        const {
+          result
+        } = res
+        this.getProductionInfo(result)
+      }
+    })
+  },
+
+  // 根据商品条形码获取商品信息
+  async getProductionInfo(code) {
+    try {
+      let data = {
+        qcode: code
+      }
+      const response = await ShoppingModel.getProductInfo(data)
+      console.log('response=>', response);
+      if (response.length > 0) {
+        // 那获取到的商品数据存放到本地
+
+        // 跳转到购物车页面
+        wx.navigateTo({
+          url: '/pages/cart/cart',
+        })
+      } else {
+        wx.showToast({
+          title: '获取不到商品数据',
+          icon: 'none'
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   /**

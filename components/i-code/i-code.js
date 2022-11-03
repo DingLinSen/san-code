@@ -18,8 +18,8 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    handleSanCode(){
-      this.triggerEvent('sanCode')
+    handleScanCode(){
+      this.triggerEvent('scanCode')
     }
   }
 })
